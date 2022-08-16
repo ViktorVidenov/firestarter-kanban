@@ -100,8 +100,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "firestarter-demo:build:production",
+            "firebaseProject": "firestarter-kanban-ea01a",
+            "firebaseHostingSite": "firestarter-kanban-ea01a"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
