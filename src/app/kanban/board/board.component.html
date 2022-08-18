@@ -13,10 +13,14 @@
     </mat-card-header>
 
     <div class="tasks" cdkDropList cdkDropListOrientation="vertical" (cdkDropListDropped)="taskDrop($event)">
-        <div class="inner-card" cdkDrag *ngFor="let task of board.tasks; let i = index">
+        <div class="inner-card" cdkDrag *ngFor="let task of board.tasks; let i = index" (click)="openDialog(task,i)">
             <mat-card [ngClass]="task.label">
                 {{task.description}}
             </mat-card>
+
+            <button mat-stroked-button (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+            </button>
 
         </div>
     </div>

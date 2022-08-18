@@ -16,7 +16,7 @@ export class BoardService {
     private db: AngularFirestore
   ) { }
 
-  async CreateBoard(data: Board) {
+  async createBoard(data: Board) {
     const user = await this.afAuth.currentUser;
     return this.db.collection('boards').add({
       ...data,

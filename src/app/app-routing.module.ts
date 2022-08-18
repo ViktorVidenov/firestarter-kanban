@@ -4,7 +4,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AuthGuard } from './user/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent},
+  { path: '', component: HomePageComponent },
   {
     path: 'login',
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'kanban',
     loadChildren: () => import('./kanban/kanban.module').then((m) => m.KanbanModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   }
 ];
 
