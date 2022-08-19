@@ -23,7 +23,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
     HomePageComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     UserModule,

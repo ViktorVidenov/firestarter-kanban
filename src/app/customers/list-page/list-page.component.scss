@@ -19,3 +19,7 @@ mat-list-item {
 
     transition: transform 300ms ease;
 }
+
+mat-nav-list mat-list-item h3{
+    margin-bottom: 0;
+}

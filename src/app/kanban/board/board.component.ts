@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { BoardService } from '../board.service';
 import { TaskDialogComponent } from '../dialogs/task-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BoardService } from '../board.service';
+import { Task } from '../board.model';
 
 @Component({
   selector: 'app-board',
@@ -11,12 +12,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class BoardComponent {
   @Input() board: any;
-
-  constructor(private boardService: BoardService, private dialog: MatDialog) { }
-
+  
   taskDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.board.task, event.previousIndex, event.currentIndex);
-    this.boardService.updateTasks(this.board.id, this.board);
+    moveItemInArray(this.board.tasks, event.previousIndex, event.currentIndex);
+    this.boardService.updateTasks(this.board.id, this.board.tasks);
   }
 
   openDialog(task?: Task, idx?: number): void {
@@ -27,13 +26,13 @@ export class BoardComponent {
         ? { task: { ...task }, isNew: false, boardId: this.board.id, idx }
         : { task: newTask, isNew: true }
     });
-    
-    dialogRef.afterClosed().subscribe((result) => {
+
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (result.isNew) {
           this.boardService.updateTasks(this.board.id, [
             ...this.board.tasks,
-            result.task,
+            result.task
           ]);
         } else {
           const update = this.board.tasks;
@@ -47,4 +46,6 @@ export class BoardComponent {
   handleDelete() {
     this.boardService.deleteBoard(this.board.id);
   }
+
+  constructor(private boardService: BoardService, private dialog: MatDialog) {}
 }
